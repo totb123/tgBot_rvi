@@ -17,7 +17,7 @@ def location(message):
         print(dolgota)
         # Короче здесь мои корды и я типа в унике вот туда нужно будет вбить рил корды нужные и сделать функцию поидее
         # которая будет то ли в базу данных заносить инфу о посещении или там отправлять запрос тип он посетил итд
-        if 35 < dolgota < 40 and 50 < shirota < 60:
+        if 37.6 < dolgota < 37.7 and 55.7 < shirota < 55.72:
             bot.send_message(message.chat.id, 'Ты в унике')
         else:
             # кстати попробуй запустить бота и отправить локацию свою на эти корды поидее должен этот вариант сыграть
@@ -27,7 +27,7 @@ def location(message):
         # это чтобы ты узнал свои корды
         dolgota = ("%s" % (location_of_user.longitude))
         shirota = ("%s" % (location_of_user.latitude))
-        bot.send_message(message.chat.id, dolgota, shirota)
+        print(dolgota, shirota)
 
 
 # Функция, обрабатывающая команду /start
