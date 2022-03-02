@@ -10,18 +10,18 @@ bot = telebot.TeleBot(config.TOKEN)
 def location(message):
     location_of_user = message.location
     if location_of_user.live_period is not None:
-        print(message.location)
-        dolgota = "%s" % (location_of_user.longitude)
-        shirota = "%s" % (location_of_user.latitude)
-        # БЛЯТЬ ЭТО ЧТО КЕКИС ЧТО ЗА ХУЙНЯ БЛЯТЬ ЧЕЛ ОН ПРОСТО НЕ ПРИВОДИТСЯ К ФЛОТУ
-        float(dolgota)
-        float(shirota)
+        #так тут мы преобразуем идиотскую инфу в обычные переменные чтобы можно было бы их использовать.
+        dolgota = float("%s" % (location_of_user.longitude))
+        shirota = float("%s" % (location_of_user.latitude))
         print(type(dolgota))
         print(dolgota)
-        # if 35 < dolgota < 40 and 50 < shirota < 60:
-        #     bot.send_message(message.chat.id, 'Ты в унике')
-        # else:
-        #     bot.send_message(message.chat.id, 'TI NE V UNIKE DURACHEK!!!!!')
+        # Короче здесь мои корды и я типа в унике вот туда нужно будет вбить рил корды нужные и сделать функцию поидее
+        # которая будет то ли в базу данных заносить инфу о посещении или там отправлять запрос тип он посетил итд
+        if 35 < dolgota < 40 and 50 < shirota < 60:
+            bot.send_message(message.chat.id, 'Ты в унике')
+        else:
+            #кстати попробуй запустить бота и отправить локацию свою на эти корды поидее должен этот вариант сыграть
+            bot.send_message(message.chat.id, 'TI NE V UNIKE DURACHEK!!!!!')
     else:
         bot.send_message(message.chat.id, 'отправь live-локацию')
 
@@ -46,7 +46,6 @@ def handle_text(message):
                                       '/start - глаголит истину\n '
                                       '/help - инструкция\n')
     # НУ Я БОЛЬШЕ И НЕПРИДУМАЛ НО ЭТО И НЕ НАДО ПРОСТО ТЕСТОВАЯ ХЕРЬ ТАК ЧТО ЗАБЕЙ МОЖЕШЬ ДЕЛИТНУТЬ))))
-
 
 
 if __name__ == '__main__':
