@@ -6,6 +6,26 @@ import config
 bot = telebot.TeleBot(config.TOKEN)
 
 
+@bot.message_handler(content_types=["location"])
+def location(message):
+    location_of_user = message.location
+    if location_of_user.live_period is not None:
+        print(message.location)
+        dolgota = "%s" % (location_of_user.longitude)
+        shirota = "%s" % (location_of_user.latitude)
+        # БЛЯТЬ ЭТО ЧТО КЕКИС ЧТО ЗА ХУЙНЯ БЛЯТЬ ЧЕЛ ОН ПРОСТО НЕ ПРИВОДИТСЯ К ФЛОТУ
+        float(dolgota)
+        float(shirota)
+        print(type(dolgota))
+        print(dolgota)
+        # if 35 < dolgota < 40 and 50 < shirota < 60:
+        #     bot.send_message(message.chat.id, 'Ты в унике')
+        # else:
+        #     bot.send_message(message.chat.id, 'TI NE V UNIKE DURACHEK!!!!!')
+    else:
+        bot.send_message(message.chat.id, 'отправь live-локацию')
+
+
 # Функция, обрабатывающая команду /start
 @bot.message_handler(commands=["start"])
 def start(m, res=False):
@@ -27,28 +47,6 @@ def handle_text(message):
                                       '/help - инструкция\n')
     # НУ Я БОЛЬШЕ И НЕПРИДУМАЛ НО ЭТО И НЕ НАДО ПРОСТО ТЕСТОВАЯ ХЕРЬ ТАК ЧТО ЗАБЕЙ МОЖЕШЬ ДЕЛИТНУТЬ))))
 
-
-# Одна из основных функций связанной с обработкой  геолокации пользователя естественно нихрена не работает(пока что:3)
-@bot.message_handler(content_types=["location"])
-def handle_location(message):
-    poseshenie = None
-    print(message)
-    location = message.location
-    if location.live_period is not None:
-        # тут условная долгота и широта я не ебу какая нужна и правильно ли написано тк не могу проверить.
-        if 500 < location.longitude < 1000 and 500 < location.latitude < 1000:
-            bot.send_message(message.chat.id, 'Посещение зачтено.'
-                                              'лайв тема шир дол \n here:'
-                             , location.latitude, location.longitude)
-        # я кстаи еще не понял как выводить данные или запрашивать или отправлять тоесть ты меня понял крч.
-        else:
-            bot.send_message(message.chat.id, 'TI NE V UNIKE DURACHEK!!!!'
-                                              'лайв тема шир дол \n here:'
-                             , location.latitude, location.longitude)
-    else:
-        bot.send_message(message.chat.id, 'пришли лайв локацию'
-                                          'offline тема шир дол \n here:'
-                         , location.latitude, location.longitude)
 
 
 if __name__ == '__main__':
