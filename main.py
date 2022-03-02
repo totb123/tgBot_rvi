@@ -10,7 +10,7 @@ bot = telebot.TeleBot(config.TOKEN)
 def location(message):
     location_of_user = message.location
     if location_of_user.live_period is not None:
-        #так тут мы преобразуем идиотскую инфу в обычные переменные чтобы можно было бы их использовать.
+        # так тут мы преобразуем идиотскую инфу в обычные переменные чтобы можно было бы их использовать.
         dolgota = float("%s" % (location_of_user.longitude))
         shirota = float("%s" % (location_of_user.latitude))
         print(type(dolgota))
@@ -20,10 +20,14 @@ def location(message):
         if 35 < dolgota < 40 and 50 < shirota < 60:
             bot.send_message(message.chat.id, 'Ты в унике')
         else:
-            #кстати попробуй запустить бота и отправить локацию свою на эти корды поидее должен этот вариант сыграть
+            # кстати попробуй запустить бота и отправить локацию свою на эти корды поидее должен этот вариант сыграть
             bot.send_message(message.chat.id, 'TI NE V UNIKE DURACHEK!!!!!')
     else:
         bot.send_message(message.chat.id, 'отправь live-локацию')
+        # это чтобы ты узнал свои корды
+        dolgota = ("%s" % (location_of_user.longitude))
+        shirota = ("%s" % (location_of_user.latitude))
+        bot.send_message(message.chat.id, dolgota, shirota)
 
 
 # Функция, обрабатывающая команду /start
